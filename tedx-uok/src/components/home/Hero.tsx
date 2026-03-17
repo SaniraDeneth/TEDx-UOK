@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Link } from "react-router-dom";
 import { formatTedxText } from "../../utils/textFormatting";
+import DensePulseMap from "./DensePulseMap";
 
 interface props {
   date: string | null;
@@ -105,25 +106,10 @@ const Hero = ({ date, venue, theme, ctaLabel, ctaLink }: props) => {
             </div>
           </div>
 
-          {/* Right Visual Element - TEDx */}
-          <div className="hidden lg:flex items-center justify-center relative opacity-0 animate-fade-in animation-delay-300">
-            <div className="relative w-full aspect-square max-w-lg">
-              {/* TEDx Text */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="relative text-[12rem] xl:text-[14rem] font-bold select-none leading-none tracking-tighter">
-                  <span className="opacity-20">{formatTedxText("TEDx", true)}</span>
-                </span>
-              </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute top-1/4 right-0 w-24 h-px bg-primary/30" />
-              <div className="absolute bottom-1/4 left-0 w-24 h-px bg-border" />
-              <div className="absolute top-0 left-1/4 w-px h-24 bg-border" />
-              <div className="absolute bottom-0 right-1/4 w-px h-24 bg-primary/30" />
-
-              {/* Corner Accents */}
-              <div className="absolute top-8 right-8 w-16 h-16 border border-border rounded-lg" />
-              <div className="absolute bottom-8 left-8 w-12 h-12 border border-primary/30 rounded-lg" />
+          {/* Right Visual Element - Sri Lanka Pulse Map */}
+          <div className="hidden lg:flex items-center justify-end relative opacity-0 animate-fade-in animation-delay-300 pr-0 mr-[-20%]">
+            <div className="relative w-full aspect-square max-w-2xl translate-x-[-10%]">
+              <DensePulseMap />
             </div>
           </div>
         </div>
