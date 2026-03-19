@@ -195,7 +195,6 @@ const PartnersPage: React.FC = () => {
         <title>Our Partners - Sponsors & Collaborators | TEDxUOK</title>
         <meta name="description" content="Meet our valued partners and sponsors who make TEDxUOK possible. Join us in spreading ideas worth sharing." />
       </Helmet>
-      {/* Hero */}
 
       <section className={sharedStyles.layout.heroSection}>
         <div

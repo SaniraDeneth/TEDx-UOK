@@ -3,7 +3,6 @@ import { Button } from "../ui/Button";
 import { Link } from "react-router-dom";
 import { formatTedxText } from "../../utils/textFormatting";
 import DensePulseMap from "./DensePulseMap";
-
 interface props {
   date: string | null;
   venue: string | null;
@@ -106,9 +105,9 @@ const Hero = ({ date, venue, theme, ctaLabel, ctaLink }: props) => {
             </div>
           </div>
 
-          {/* Right Visual Element - Sri Lanka Pulse Map */}
-          <div className="hidden lg:flex items-center justify-end relative opacity-0 animate-fade-in animation-delay-300 pr-0 mr-[-20%]">
-            <div className="relative w-full aspect-square max-w-2xl translate-x-[-10%]">
+          {/* Right Visual Element - Provided Map */}
+          <div className="hidden lg:flex items-center justify-end relative opacity-0 animate-fade-in animation-delay-300 pr-0 mr-[-25%]">
+            <div className="relative w-[130%] max-w-[850px] translate-x-[-15%]">
               <DensePulseMap />
             </div>
           </div>
