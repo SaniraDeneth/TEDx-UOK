@@ -6,7 +6,7 @@ import { sharedStyles } from "../../utils/constants";
 import { supabase } from "../../lib/supabase";
 import { getSupabaseStorageUrl } from "../../lib/utils";
 import Loading from "../../components/ui/Loading";
-import { useSEO } from "../../hooks/useSEO";
+import { Helmet } from "react-helmet-async";
 
 interface Partner {
   id: string;
@@ -20,12 +20,6 @@ interface Partner {
 const PartnersPage: React.FC = () => {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useSEO({
-    title: "Our Partners - Collaborators & Supporters | TEDxUOK",
-    description:
-      "Explore the esteemed partners of TEDxUOK, showcasing our valued collaborators across Title, Gold, Silver, Bronze, and In-kind tiers.",
-  });
 
   useEffect(() => {
     const fetchPartners = async () => {
@@ -197,7 +191,10 @@ const PartnersPage: React.FC = () => {
 
   return (
     <main className="bg-black text-white min-h-screen">
-      {/* Hero */}
+      <Helmet>
+        <title>Our Partners - Sponsors & Collaborators | TEDxUOK</title>
+        <meta name="description" content="Meet our valued partners and sponsors who make TEDxUOK possible. Join us in spreading ideas worth sharing." />
+      </Helmet>
 
       <section className={sharedStyles.layout.heroSection}>
         <div
