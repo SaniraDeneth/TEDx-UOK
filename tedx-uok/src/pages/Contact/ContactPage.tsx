@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { FormInput } from "../../components/forms/FormInput";
 import { FormSelect } from "../../components/forms/FormSelect";
 import { FormTextarea } from "../../components/forms/FormTextarea";
@@ -22,11 +23,8 @@ interface FormErrors {
   category?: string;
 }
 
-import { useSEO } from "../../hooks/useSEO";
-import { seoConfig } from "../../config/seo";
 
 export const ContactPage: React.FC = () => {
-  useSEO(seoConfig.contact);
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -227,6 +225,10 @@ export const ContactPage: React.FC = () => {
           width: "100%",
         }}
       >
+        <Helmet>
+          <title>Contact Us - Get in Touch | TEDxUOK</title>
+          <meta name="description" content="Contact TEDxUOK for inquiries, partnerships, or general questions. Reach out to our team at the University of Kelaniya." />
+        </Helmet>
         <div className="bg-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg: px-8">
           <div className="max-w-3xl mx-auto w-full">
             <div className="text-center mb-12">

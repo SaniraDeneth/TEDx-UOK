@@ -1,6 +1,7 @@
 import { formatTedxText } from '../../utils/textFormatting';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft } from 'lucide-react';
+import { Helmet } from "react-helmet-async";
 
 export default function AboutTedxUokPage() {
   const currentTheme = "The Ripple Effect";
@@ -8,6 +9,10 @@ export default function AboutTedxUokPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
+      <Helmet>
+        <title>About TEDxUOK | TEDx University of Kelaniya</title>
+        <meta name="description" content="Our story, mission, and commitment to spreading ideas at University of Kelaniya." />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
