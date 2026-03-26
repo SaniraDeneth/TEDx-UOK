@@ -42,7 +42,7 @@ const DensePulseMap = () => {
       <style>
         {`
           .dense-map-custom-image {
-              filter: grayscale(100%) invert(1) contrast(1000%) brightness(0.15) sepia(1) saturate(10) hue-rotate(330deg) contrast(2);
+              opacity: 0.5;
           }
           @keyframes densePulseAnimation {
               0% { transform: scale(1); opacity: 0.8; }
@@ -76,9 +76,9 @@ const DensePulseMap = () => {
       <div className="relative w-full bg-transparent overflow-hidden rounded-2xl border border-white/5">
         {/* Map image native height */}
         <img
-          src="/Map.png"
+          src="/Map.jpg"
           alt="Event Map"
-          className="w-full h-auto dense-map-custom-image opacity-80 pointer-events-none"
+          className="w-full h-auto dense-map-custom-image pointer-events-none"
         />
 
         {/* SVG Route Line Overlay */}
