@@ -1,7 +1,7 @@
 import { formatTedxText } from '../../utils/textFormatting';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft } from 'lucide-react';
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
 
 const aboutTedxUokContent = {
   title: "About TEDx UoK - Our Mission and Story",
@@ -15,10 +15,11 @@ const aboutTedxUokContent = {
 export default function AboutTedxUokPage() {
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
-      <Helmet>
-        <title>{aboutTedxUokContent.title} | TEDx University of Kelaniya</title>
-        <meta name="description" content="Our story, mission, and commitment to spreading ideas at University of Kelaniya." />
-      </Helmet>
+      <SEO 
+        title="About TEDxUOK | Our Story, Mission & Vision" 
+        description="TEDxUOK is the flagship independently licensed TED event at the University of Kelaniya. Uncover our story, mission, and the vision driving ideas in Sri Lanka." 
+        url="https://tedxuok.org/about/tedx-uok" 
+      />
       {/* Hero Section */}
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">

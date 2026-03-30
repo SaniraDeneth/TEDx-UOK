@@ -1,4 +1,52 @@
+# =============================================================
+#  robots.txt — TEDxUOK (https://tedxuok.org)
+#  Last updated: 2026-03-30
+# =============================================================
+
+# ---- Allow all well-behaved crawlers ----
 User-agent: *
 Allow: /
 
+# Block utility / transactional routes from indexing
+Disallow: /payment/
+Disallow: /payment/success
+Disallow: /payment/fail
+Disallow: /payment/cancel
+Disallow: /volunteer/register
+Disallow: /community/register
+Disallow: /coming-soon
+
+# Block Next.js / Vite internal assets (no public value)
+Disallow: /src/
+Disallow: /_next/
+Disallow: /api/
+
+# ---- Google-specific directives ----
+User-agent: Googlebot
+Allow: /
+Disallow: /payment/
+Disallow: /volunteer/register
+Disallow: /community/register
+
+# ---- Bing ----
+User-agent: Bingbot
+Allow: /
+Disallow: /payment/
+Disallow: /volunteer/register
+Disallow: /community/register
+
+# ---- Block known bad bots ----
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ---- Sitemap declaration ----
 Sitemap: https://tedxuok.org/sitemap.xml

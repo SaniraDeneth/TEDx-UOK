@@ -11,14 +11,11 @@ import {
   FileArchive,
 } from "lucide-react";
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
+import { seoConfig } from "../../config/seo";
 
 const PressMedia = () => {
-  useSEO({
-    title: "Press & Media - Resources & Assets | TEDxUOK",
-    description:
-      "Access official press kits, logos, and media resources for TEDxUOK. Get the latest updates and information for journalists and content creators.",
-  });
+  // SEO Handled in JSX
   const pressKitItems = [
     {
       id: 1,
@@ -120,6 +117,7 @@ const PressMedia = () => {
 
   return (
     <div className="bg-black text-white min-h-screen pt-24 pb-20 overflow-x-hidden">
+      <SEO {...seoConfig.media} url="https://tedxuok.org/media" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">

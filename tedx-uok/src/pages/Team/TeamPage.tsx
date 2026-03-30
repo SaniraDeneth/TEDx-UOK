@@ -7,7 +7,8 @@ import { sharedStyles } from '../../utils/constants';
 import { supabase } from '../../lib/supabase';
 import { getSupabaseStorageUrl } from '../../lib/utils';
 import Loading from '../../components/ui/Loading';
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
+import { seoConfig } from "../../config/seo";
 interface TeamMember {
   id: string;
   full_name: string;
@@ -21,10 +22,7 @@ interface TeamMember {
 const TeamPage: React.FC = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
-  useSEO({
-    title: "Our Team - Meet the Organizers| TEDxUOK",
-    description: "Discover the passionate team behind TEDxUOK, including our licensee, executive committee, and directors dedicated to bringing inspiring ideas to life."
-  })
+  // SEO Handled in JSX
 
   useEffect(() => {
     AOS.init({
@@ -202,6 +200,7 @@ const TeamPage: React.FC = () => {
 
   return (
     <main className="bg-black text-white min-h-screen">
+      <SEO {...seoConfig.team} url="https://tedxuok.org/team" />
       {/* Hero */}
       <section className={sharedStyles.layout.heroSection}>
         <div

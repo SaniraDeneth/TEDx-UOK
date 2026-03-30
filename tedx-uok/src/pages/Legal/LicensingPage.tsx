@@ -1,12 +1,13 @@
 import { formatTedxText } from '../../utils/textFormatting';
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 export default function LicensingPage() {
-  useSEO(seoConfig.licensing);
+  // SEO Handled in JSX
 
   return (
     <main className="bg-black w-full">
+      <SEO {...seoConfig.licensing} url="https://tedxuok.org/licensing" />
       <section className="px-6 py-32">
         <div className="mx-auto max-w-4xl space-y-12">
           {/* Header */}

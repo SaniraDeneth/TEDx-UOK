@@ -1,36 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <!-- ==================== CORE PAGES ==================== -->
+
+  <!-- Home -->
   <url>
     <loc>https://tedxuok.org/</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
 
+  <!-- About Hub -->
   <url>
     <loc>https://tedxuok.org/about</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
+  <!-- About: TED -->
   <url>
     <loc>https://tedxuok.org/about/ted</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
+  <!-- About: TEDx -->
   <url>
     <loc>https://tedxuok.org/about/tedx</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
+  <!-- About: TEDxUOK -->
   <url>
-    <loc>https://tedxuok.org/about/tedxuok</loc>
+    <loc>https://tedxuok.org/about/tedx-uok</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
+  <!-- Theme -->
   <url>
-    <loc>https://tedxuok.org/contact</loc>
+    <loc>https://tedxuok.org/theme</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
+  <!-- ==================== EVENT PAGES ==================== -->
+
+  <!-- Speakers -->
   <url>
-    <loc>https://tedxuok.org/partners</loc>
+    <loc>https://tedxuok.org/speakers</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
+  <!-- Agenda -->
+  <url>
+    <loc>https://tedxuok.org/agenda</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Venue -->
+  <url>
+    <loc>https://tedxuok.org/venue</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Registration -->
   <url>
     <loc>https://tedxuok.org/register</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ==================== COMMUNITY & PEOPLE ==================== -->
+
+  <!-- Team -->
+  <url>
+    <loc>https://tedxuok.org/team</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Partners -->
+  <url>
+    <loc>https://tedxuok.org/partners</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Volunteer Landing -->
+  <url>
+    <loc>https://tedxuok.org/volunteer</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Volunteer Registration Form -->
+  <url>
+    <loc>https://tedxuok.org/volunteer/register</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Community Registration -->
+  <url>
+    <loc>https://tedxuok.org/community/register</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ==================== CONTENT PAGES ==================== -->
+
+  <!-- Blog Index -->
+  <url>
+    <loc>https://tedxuok.org/blog</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Impact -->
+  <url>
+    <loc>https://tedxuok.org/impact</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Press & Media -->
+  <url>
+    <loc>https://tedxuok.org/media</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Past Events -->
+  <url>
+    <loc>https://tedxuok.org/past-events</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://tedxuok.org/faq</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://tedxuok.org/contact</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ==================== LEGAL PAGES ==================== -->
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://tedxuok.org/privacy</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Accessibility -->
+  <url>
+    <loc>https://tedxuok.org/accessibility</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Code of Conduct -->
+  <url>
+    <loc>https://tedxuok.org/code-of-conduct</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Licensing -->
+  <url>
+    <loc>https://tedxuok.org/licensing</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>

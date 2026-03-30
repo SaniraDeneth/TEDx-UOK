@@ -24,11 +24,11 @@ interface Venue {
   entry_guidelines?: string;
 }
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 const VenuePage: React.FC = () => {
-  useSEO(seoConfig.venue);
+  // SEO handled in JSX
   const [venue, setVenue] = useState<Venue | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -121,6 +121,7 @@ const VenuePage: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black text-white flex flex-col">
+      <SEO {...seoConfig.venue} url="https://tedxuok.org/venue" />
       {/* Inner container */}
       <div className="max-w-[1280px] mx-auto px-4 py-16 flex-grow w-full">
         {/* Header */}
