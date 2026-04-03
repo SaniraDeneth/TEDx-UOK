@@ -6,7 +6,8 @@ import { FormSelect } from "../../components/forms/FormSelect";
 import { SubmitButton } from "../../components/forms/SubmitButton";
 import { FormMessage } from "../../components/forms/FormMessage";
 import { formatTedxText } from "../../utils/textFormatting";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
+import { seoConfig } from "../../config/seo";
 
 interface RegistrationFormData {
   full_name: string;
@@ -292,10 +293,7 @@ export const RegistrationPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
-      <Helmet>
-        <title>Event Registration - Secure Your Spot | TEDxUOK</title>
-        <meta name="description" content="Register for TEDxUOK at the University of Kelaniya. Secure your spot for inspiring talks, innovative ideas, and community impact." />
-      </Helmet>
+      <SEO {...seoConfig.registration} url="https://tedxuok.org/register" />
       <div className="max-w-3xl mx-auto w-full">
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">

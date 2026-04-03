@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Globe, Handshake, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
 import { supabase } from "../../lib/supabase"; // මෙතැනින් import කරන්න
 import { formatTedxText } from "../../utils/textFormatting";
 
@@ -48,10 +48,11 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
-      <Helmet>
-        <title>About TEDx UOK | TEDx University of Kelaniya</title>
-        <meta name="description" content="Learn about TEDxUOK, an independently organized TEDx event at the University of Kelaniya. Discover our mission, vision, and commitment to spreading ideas worth sharing." />
-      </Helmet>
+      <SEO 
+        title="About TEDxUOK | University of Kelaniya Sri Lanka" 
+        description="Learn about TEDxUOK — an independently organized TEDx event at the University of Kelaniya celebrating innovation, ideas, and community impact in Sri Lanka." 
+        url="https://tedxuok.org/about" 
+      />
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-6xl md:text-7xl font-bold mb-8">

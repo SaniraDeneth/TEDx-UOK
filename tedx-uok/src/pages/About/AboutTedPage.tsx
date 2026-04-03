@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ExternalLink, Film, GraduationCap, Library } from 'lucide-react';
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
 
 const aboutTedContent = {
   title: "About TED",
@@ -35,10 +35,11 @@ const historyContent = {
 export default function AboutTedPage() {
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
-      <Helmet>
-        <title>{aboutTedContent.title} | TEDx University of Kelaniya</title>
-        <meta name="description" content="Read about TED's mission, history, and global initiatives of the world's leading ideas platform." />
-      </Helmet>
+      <SEO 
+        title="What Is TED? | TEDxUOK University of Kelaniya" 
+        description="Discover TED — Technology, Entertainment, Design. The global platform sharing ideas worth spreading through powerful short talks that inspire millions worldwide." 
+        url="https://tedxuok.org/about/ted" 
+      />
       {/* Hero Section */}
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">

@@ -2,11 +2,11 @@ import { formatTedxText } from '../../utils/textFormatting';
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 export const VolunteerApplicationPage: React.FC = () => {
-  useSEO(seoConfig.volunteerRegister);
+  // SEO Handled in JSX
   // Set body background to black when component mounts
   React.useEffect(() => {
     document.body.style.backgroundColor = "#000000";
@@ -324,6 +324,7 @@ export const VolunteerApplicationPage: React.FC = () => {
           width: "100%",
         }}
       >
+        <SEO {...seoConfig.volunteer} url="https://tedxuok.org/volunteer/register" />
         <div className="bg-black">
           {/* Hero Section */}
           <section className="bg-black py-32 px-4">

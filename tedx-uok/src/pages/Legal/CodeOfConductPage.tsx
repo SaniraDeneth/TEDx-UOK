@@ -1,12 +1,13 @@
 import { formatTedxText } from '../../utils/textFormatting';
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 export default function CodeOfConductPage() {
-  useSEO(seoConfig.codeOfConduct);
+  // SEO Handled in JSX
 
   return (
     <main className="bg-black w-full">
+      <SEO {...seoConfig.codeOfConduct} url="https://tedxuok.org/code-of-conduct" />
       <section className="px-6 py-32">
         <div className="mx-auto max-w-4xl space-y-12">
           {/* Header */}

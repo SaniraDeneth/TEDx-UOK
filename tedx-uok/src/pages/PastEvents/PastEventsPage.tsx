@@ -1,11 +1,11 @@
 import { Play, Users, Image as ImageIcon, Calendar } from "lucide-react";
 import { formatTedxText } from "../../utils/textFormatting";
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 export default function PastEventsPage() {
-  useSEO(seoConfig.pastEvents);
+  // SEO Handled in JSX
   const pastEvents = [
     {
       year: "2023",
@@ -35,6 +35,7 @@ export default function PastEventsPage() {
 
     return (
         <div className="min-h-screen bg-background text-foreground pt-20">
+            <SEO {...seoConfig.pastEvents} url="https://tedxuok.org/past-events" />
             <section className="py-10 sm:py-16 px-4 sm:px-6 max-w-7xl mx-auto">
                 <div className="text-center mb-10 md:mb-16">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 transition-all duration-300">Past Events</h1>

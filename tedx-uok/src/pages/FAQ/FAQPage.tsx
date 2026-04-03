@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { supabase } from "../../lib/supabase";
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 type FAQItem = {
@@ -28,7 +28,7 @@ type FAQGroup = {
 };
 
 export default function FAQPage() {
-  useSEO(seoConfig.faq);
+  // SEO Handled in JSX
 
   const [openId, setOpenId] = useState<string | null>(null);
   const [faqGroups, setFaqGroups] = useState<FAQGroup[]>([]);
@@ -116,6 +116,7 @@ export default function FAQPage() {
 
   return (
     <main className="bg-black w-full">
+      <SEO {...seoConfig.faq} url="https://tedxuok.org/faq" />
       <section className="mx-auto max-w-6xl px-6 py-32 space-y-24">
 
         {/* Header */}

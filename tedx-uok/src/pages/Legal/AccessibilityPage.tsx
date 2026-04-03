@@ -1,5 +1,5 @@
 import { formatTedxText } from '../../utils/textFormatting';
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 const TedX = () => (
@@ -9,10 +9,11 @@ const TedX = () => (
 );
 
 export default function AccessibilityPage() {
-  useSEO(seoConfig.accessibility);
+  // SEO Handled in JSX
 
   return (
     <main className="bg-black w-full">
+      <SEO {...seoConfig.accessibility} url="https://tedxuok.org/accessibility" />
       <section className="px-6 pt-24 pb-32">
         <div className="mx-auto max-w-4xl space-y-12">
           {/* Header */}

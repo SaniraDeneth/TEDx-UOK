@@ -3,7 +3,7 @@ import { supabase } from "../../api/supabaseClient";
 import { useEvents } from "../../hooks/useEvents";
 import { useSpeakers } from "../../hooks/useSpeakers";
 import { formatTedxText } from "../../utils/textFormatting";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
 
 const SPEAKER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_SPEAKER_PHOTOS;
 
@@ -53,10 +53,11 @@ const Theme = () => {
 
   return (
     <main className="min-h-screen bg-background relative top-[-50px]">
-      <Helmet>
-        <title>{themeName} | TEDx University of Kelaniya 2026 Theme</title>
-        <meta name="description" content={`Explore the theme of TEDx University of Kelaniya 2026: ${themeName}. Ideas Worth Spreading.`} />
-      </Helmet>
+      <SEO 
+        title="TEDxUOK 2026 Theme | Ideas That Shape the Future" 
+        description="Explore the inspiring theme of TEDxUOK 2026. Dive into the ideas, questions, and perspectives that define this year's event at the University of Kelaniya." 
+        url="https://tedxuok.org/theme" 
+      />
       {/* Hero Section - Theme Title */}
       <section className="pt-24 pb-16 md:pt-32 md:pb-24 px-6">
         <div className="container mx-auto">

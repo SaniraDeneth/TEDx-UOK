@@ -1,15 +1,16 @@
 import { formatTedxText } from '../../utils/textFormatting';
 import { Link } from 'react-router-dom';
 import { Check, ChevronLeft, ExternalLink, X } from 'lucide-react';
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
 
 export default function AboutTedxPage() {
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
-      <Helmet>
-        <title>About TEDx | TEDx University of Kelaniya</title>
-        <meta name="description" content="Learn about the TEDx program, licensing, and how it differs from TED conferences." />
-      </Helmet>
+      <SEO 
+        title="What Is TEDx? | Independently Organized TED Events" 
+        description="TEDx brings TED-style talks to local communities worldwide. Discover how independently organized events like TEDxUOK spark ideas and inspire Sri Lanka." 
+        url="https://tedxuok.org/about/tedx" 
+      />
       {/* Hero Section */}
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">

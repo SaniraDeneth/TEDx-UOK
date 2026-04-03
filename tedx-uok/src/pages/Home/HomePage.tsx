@@ -15,7 +15,7 @@ import Highlights from "../../components/home/Highlights";
 // import Speakers, { type Speaker } from "../../components/home/Speakers";
 import { ThemePreview } from "../../components/home/ThemePreview";
 // import { Partners, type Partner } from "../../components/home/Partners";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/common/SEO";
 
 // const SPEAKER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_SPEAKER_PHOTOS;
 // const PARTNER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_PARTNER_LOGOS;
@@ -74,10 +74,11 @@ const HomePage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>TEDxUOK - Ideas Worth Spreading | University of Kelaniya</title>
-        <meta name="description" content="An independently organized TEDx event at the University of Kelaniya. Join us for inspiring talks, innovative ideas, and community impact." />
-      </Helmet>
+      <SEO 
+        title="TEDxUOK – Ideas Worth Spreading | Kelaniya" 
+        description="Experience TEDxUOK at the University of Kelaniya — a stage for bold ideas, inspiring speakers, and transformative talks that connect Sri Lanka to the world." 
+        url="https://tedxuok.org/" 
+      />
       <div className="relative -top-16.25 min-h-screen bg-background">
         <Hero
           date={eventDate}

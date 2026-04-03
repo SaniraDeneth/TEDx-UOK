@@ -88,11 +88,11 @@ const PageHero = ({
 //   return <span ref={nodeRef}>{count}</span>;
 // };
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 const ImpactPage = () => {
-  useSEO(seoConfig.impact);
+  // SEO Handled in JSX
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -115,6 +115,7 @@ const ImpactPage = () => {
 
   return (
     <div className="w-full min-h-screen bg-black text-white">
+      <SEO {...seoConfig.impact} url="https://tedxuok.org/impact" />
       {/* Hero Section */}
       <div className="pt-24">
         <PageHero

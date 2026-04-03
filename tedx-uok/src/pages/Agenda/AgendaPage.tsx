@@ -30,11 +30,11 @@ interface EventDetails {
   };
 }
 
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 const AgendaPage = () => {
-  useSEO(seoConfig.agenda);
+  // SEO Handled in JSX
   const [agendaItems, setAgendaItems] = useState<AgendaItem[]>([]);
   const [eventDetails, setEventDetails] = useState<EventDetails | null>(null);
   const [loading, setLoading] = useState(true);
@@ -152,6 +152,7 @@ const AgendaPage = () => {
 
   return (
     <div className="relative bg-black text-white min-h-screen pt-24 pb-20 overflow-x-hidden">
+      <SEO {...seoConfig.agenda} url="https://tedxuok.org/agenda" />
       {/* Background Decorative Elements */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center select-none">
         <div className="relative opacity-[0.025] transform -rotate-12 scale-150 sm:scale-100">

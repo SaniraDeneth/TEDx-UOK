@@ -1,7 +1,7 @@
 import { formatTedxText } from '../../utils/textFormatting';
 import React from "react";
 import { supabase } from "../../lib/supabase";
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 
 interface FormData {
@@ -182,7 +182,7 @@ const FormSelect = ({
 
 const VolunteersPage: React.FC = () => {
   // Set body background to black when component mounts
-  useSEO(seoConfig.volunteers);
+  // SEO Handled in JSX
 
   React.useEffect(() => {
     document.body.style.backgroundColor = "#000000";
@@ -429,6 +429,7 @@ const VolunteersPage: React.FC = () => {
           width: "100%",
         }}
       >
+        <SEO {...seoConfig.volunteer} url="https://tedxuok.org/volunteer" />
         <div className="bg-black py-12 px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">

@@ -1,12 +1,13 @@
-import { useSEO } from "../../hooks/useSEO";
+import SEO from "../../components/common/SEO";
 import { seoConfig } from "../../config/seo";
 import { formatTedxText } from "../../utils/textFormatting";
 
 export default function PrivacyPolicyPage() {
-  useSEO(seoConfig.privacy);
+  // SEO Handled in JSX
 
   return (
     <main className="bg-black w-full">
+      <SEO {...seoConfig.privacy} url="https://tedxuok.org/privacy" />
       <section className="px-6 py-32">
         <div className="mx-auto max-w-4xl space-y-12">
           {/* Header */}
