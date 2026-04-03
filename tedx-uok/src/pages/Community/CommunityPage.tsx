@@ -321,7 +321,7 @@ const CommunityRegistrationPage: React.FC = () => {
           width: "100%",
         }}
       >
-        <div className="bg-black py-12 px-4">
+        <div className="bg-black py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <h1

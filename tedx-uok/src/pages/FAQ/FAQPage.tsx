@@ -116,7 +116,7 @@ export default function FAQPage() {
 
   return (
     <main className="bg-black w-full">
-      <section className="mx-auto max-w-6xl px-6 py-32 space-y-24">
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24 lg:py-32 space-y-16 md:space-y-24">
 
         {/* Header */}
         <div className="text-center space-y-4">

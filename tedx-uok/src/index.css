@@ -126,6 +126,8 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%; /* Prevents text zooming on landscape rotation */
+    -webkit-tap-highlight-color: transparent; /* Removes blue flash when tapping links on iOS */
   }
 
   body {
@@ -140,6 +142,8 @@
     min-width: 320px;
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* Crisp text on mobile retina screens */
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -165,6 +169,7 @@
     color: var(--white);
     text-decoration: none;
     transition: color 0.2s ease;
+    touch-action: manipulation; /* Prevents double-tap-to-zoom delay */
   }
 
   a:hover {
@@ -177,6 +182,7 @@
     cursor: pointer;
     border: none;
     outline: none;
+    touch-action: manipulation; /* Prevents double-tap-to-zoom delay */
   }
 
   button:focus-visible {

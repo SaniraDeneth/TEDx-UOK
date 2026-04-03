@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <main className="bg-black w-full">
-      <section className="px-6 py-32">
+      <section className="px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-4xl space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">

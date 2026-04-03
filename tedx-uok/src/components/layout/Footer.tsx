@@ -14,7 +14,7 @@ const footerLinks = {
     { name: "Community", href: "/community/register" },
   ],
   about: [
-    { id: "about-ted", name: "About TED", href: "/about#ted" },
+    { id: "about-ted", name: "About TED", href: "/about/ted" },
     {
       id: "about-tedx",
       name: (
@@ -22,7 +22,7 @@ const footerLinks = {
           About {formatTedxText("TEDx")}
         </>
       ),
-      href: "/about#tedx",
+      href: "/about/tedx",
     },
     {
       id: "about-tedxuok",
@@ -31,7 +31,7 @@ const footerLinks = {
           About {formatTedxText("TEDx UoK")}
         </>
       ),
-      href: "/about#tedxuok",
+      href: "/about/tedx-uok",
     },
   ],
   legal: [
