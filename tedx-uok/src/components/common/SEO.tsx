@@ -6,16 +6,19 @@ interface SEOProps {
   url: string;
 }
 
-export default function SEO({ title, description, url }: SEOProps) {
+export default function SEO({ title, description, url, structuredData }: SEOProps & { structuredData?: object }) {
   return (
     <Helmet>
       {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
+      <meta name="robots" content="index, follow" />
 
-      {/* Canonical URL */}
+      {/* Canonical URL & Language */}
       <link rel="canonical" href={url} />
+      <link rel="alternate" hrefLang="en" href={url} />
+      <link rel="alternate" hrefLang="x-default" href={url} />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
@@ -30,6 +33,13 @@ export default function SEO({ title, description, url }: SEOProps) {
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content="https://tedxuok.org/og-image.jpg" />
+
+      {/* Structured Data */}
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
     </Helmet>
   );
 }

@@ -78,6 +78,31 @@ const HomePage = () => {
         title="TEDxUOK – Ideas Worth Spreading | Kelaniya" 
         description="Experience TEDxUOK at the University of Kelaniya — a stage for bold ideas, inspiring speakers, and transformative talks that connect Sri Lanka to the world." 
         url="https://tedxuok.org/" 
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": "TEDx UoK",
+          "description": "An independently organised TED event at the University of Kelaniya, Sri Lanka.",
+          "url": "https://tedxuok.org/",
+          ...(eventDate ? { "startDate": new Date(eventDate).toISOString() } : {}),
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "organizer": {
+            "@type": "Organization",
+            "name": "TEDx UoK",
+            "url": "https://tedxuok.org/"
+          },
+          "location": {
+            "@type": "Place",
+            "name": eventVenue || "University of Kelaniya",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Kelaniya",
+              "addressRegion": "Western Province",
+              "addressCountry": "LK"
+            }
+          }
+        }}
       />
       <div className="relative -top-16.25 min-h-screen bg-background">
         <Hero

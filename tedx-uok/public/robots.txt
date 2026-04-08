@@ -35,18 +35,22 @@ Disallow: /payment/
 Disallow: /volunteer/register
 Disallow: /community/register
 
-# ---- Block known bad bots ----
-User-agent: AhrefsBot
-Disallow: /
+# ---- Allow all well-behaved crawlers ----
+User-agent: *
+Allow: /
 
+# Allow common SEO bots (to prevent score drops in audits)
 User-agent: SemrushBot
-Disallow: /
+Allow: /
 
-User-agent: MJ12bot
-Disallow: /
+User-agent: AhrefsBot
+Allow: /
 
-User-agent: DotBot
-Disallow: /
+User-agent: Rogerbot
+Allow: /
+
+User-agent: dotbot
+Allow: /
 
 # ---- Sitemap declaration ----
 Sitemap: https://tedxuok.org/sitemap.xml

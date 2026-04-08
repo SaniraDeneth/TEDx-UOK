@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Linkedin, Twitter } from "lucide-react";
+import {
+  Instagram,
+  Facebook,
+  Linkedin,
+  Twitter,
+  Youtube,
+  Music2,
+} from "lucide-react";
 import { formatTedxText } from "../../utils/textFormatting";
 
 const footerLinks = {
@@ -41,11 +48,7 @@ const footerLinks = {
     { id: "licensing", name: "Licensing", href: "/licensing" },
     {
       id: "tedx-rules",
-      name: (
-        <>
-          {formatTedxText("TEDx")} Rules
-        </>
-      ),
+      name: <>{formatTedxText("TEDx")} Rules</>,
       href: "https://www.ted.com/about/our-organization/our-policies-terms/tedx-rules",
       external: true,
     },
@@ -53,10 +56,24 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://x.com", label: "X (Twitter)" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/tedx_uok",
+    label: "Instagram",
+  },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/share/1DzDCeL2jE/",
+    label: "Facebook",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/company/tedx-uok/",
+    label: "LinkedIn",
+  },
+  { icon: Twitter, href: "https://x.com/TedxUoK", label: "X (Twitter)" },
+  { icon: Youtube, href: "https://www.youtube.com/@tedxuok", label: "YouTube" },
+  { icon: Music2, href: "https://www.tiktok.com/@tedx.uok", label: "TikTok" },
 ];
 
 export default function Footer() {
@@ -75,8 +92,8 @@ export default function Footer() {
               {formatTedxText("TEDx UoK", true)}
             </Link>
             <p className="text-white/50 text-sm leading-relaxed text-left">
-              Ideas worth spreading. An independently organized {formatTedxText("TEDx")}{" "}
-              event at the University of Kelaniya.
+              Ideas worth spreading. An independently organized{" "}
+              {formatTedxText("TEDx")} event at the University of Kelaniya.
             </p>
             <div className="flex space-x-4">
               {socials.map((social) => (
