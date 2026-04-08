@@ -24,7 +24,7 @@ export default function SpeakersListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black pt-32 pb-20">
+    <div className="min-h-screen bg-black pt-32 pb-20 relative overflow-hidden">
       {/* Background Gradient */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-[#EB0028] rounded-full blur-[200px] opacity-10"></div>
