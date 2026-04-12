@@ -1,3 +1,5 @@
+import type { Block } from "./block";
+
 export interface Speaker {
   speaker_id: string;
   full_name: string;
@@ -25,6 +27,7 @@ export interface BlogPost {
   author_name: string;
   published_at?: string; // timestamp (ISO string for frontend)
   is_published: boolean;
+  blocks?: Block[]; // for the block-based editor
 }
 
 export interface ContactMessage {

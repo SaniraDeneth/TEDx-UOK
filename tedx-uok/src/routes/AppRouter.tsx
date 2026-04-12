@@ -30,6 +30,9 @@ import CommunityRegistrationPage from "../pages/Community/CommunityPage";
 import NotFoundPage from "../pages/NotFound/NotFoundPage";
 import ComingSoon from "../pages/ComingSoon/ComingSoon";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
+import AdminDashboardPage from "../pages/Admin/AdminDashboardPage";
+import AdminBlogEditorPage from "../pages/Admin/AdminBlogEditorPage";
+import AdminGuard from "../pages/Admin/AdminGuard";
 
 import ScrollToTop from "../components/common/ScrollToTop";
 
@@ -39,291 +42,319 @@ function AnimatedRoutes() {
   return (
     <Routes location={location}>
       <Route path="/admin/login" element={<AdminLoginPage />} />
-
       <Route
-        path="/"
+        path="/admin/dashboard"
         element={
-          <div key={location.pathname} className="page-transition">
-            <HomePage />
-          </div>
+          <AdminGuard>
+            <AdminDashboardPage />
+          </AdminGuard>
         }
       />
       <Route
-        path="/about"
+        path="/admin/blog/new"
         element={
-          <div key={location.pathname} className="page-transition">
-            <AboutPage />
-          </div>
+          <AdminGuard>
+            <AdminBlogEditorPage />
+          </AdminGuard>
         }
       />
       <Route
-        path="/about/ted"
+        path="/admin/blog/edit/:id"
         element={
-          <div key={location.pathname} className="page-transition">
-            <AboutTedPage />
-          </div>
-        }
-      />
-      <Route
-        path="/about/tedx"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <AboutTedxPage />
-          </div>
-        }
-      />
-      <Route
-        path="/about/tedx-uok"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <AboutTedxUokPage />
-          </div>
-        }
-      />
-      <Route
-        path="/theme"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ThemePage />
-          </div>
+          <AdminGuard>
+            <AdminBlogEditorPage />
+          </AdminGuard>
         }
       />
 
-      <Route
-        path="/speakers"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
-      <Route
-        path="/speakers/:id"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
+      {/* Public Routes with Navbar/Footer */}
+      <Route element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <HomePage />
+            </div>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <AboutPage />
+            </div>
+          }
+        />
+        <Route
+          path="/about/ted"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <AboutTedPage />
+            </div>
+          }
+        />
+        <Route
+          path="/about/tedx"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <AboutTedxPage />
+            </div>
+          }
+        />
+        <Route
+          path="/about/tedx-uok"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <AboutTedxUokPage />
+            </div>
+          }
+        />
+        <Route
+          path="/theme"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ThemePage />
+            </div>
+          }
+        />
 
-      <Route
-        path="/agenda"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
+        <Route
+          path="/speakers"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
+        <Route
+          path="/speakers/:id"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
 
-      <Route
-        path="/team"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <TeamPage />
-          </div>
-        }
-      />
-      <Route
-        path="/partners"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-            {/* <PartnersPage /> */}
-          </div>
-        }
-      />
-      <Route
-        path="/contact"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ContactPage />
-          </div>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <RegistrationPage />
-          </div>
-        }
-      />
+        <Route
+          path="/agenda"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
 
-      {/* Blog */}
-      <Route
-        path="/blog"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
-      <Route
-        path="/blog/:slug"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
-      <Route
-        path="/blog/detail/:id"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
+        <Route
+          path="/team"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <TeamPage />
+            </div>
+          }
+        />
+        <Route
+          path="/partners"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+              {/* <PartnersPage /> */}
+            </div>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ContactPage />
+            </div>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <RegistrationPage />
+            </div>
+          }
+        />
 
-      {/* New Pages */}
-      <Route
-        path="/impact"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ImpactPage />
-          </div>
-        }
-      />
-      <Route
-        path="/media"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <MediaPage />
-          </div>
-        }
-      />
-      <Route
-        path="/past-events"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <PastEventsPage />
-          </div>
-        }
-      />
+        {/* Blog */}
+        <Route
+          path="/blog"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
+        <Route
+          path="/blog/detail/:id"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
 
-      {/* Volunteer Routes - Swapped to match content */}
-      <Route
-        path="/volunteer"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <VolunteerApplicationPage />
-          </div>
-        }
-      />
-      <Route
-        path="/volunteer/register"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <VolunteerPage />
-          </div>
-        }
-      />
+        {/* New Pages */}
+        <Route
+          path="/impact"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ImpactPage />
+            </div>
+          }
+        />
+        <Route
+          path="/media"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <MediaPage />
+            </div>
+          }
+        />
+        <Route
+          path="/past-events"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <PastEventsPage />
+            </div>
+          }
+        />
 
-      <Route
-        path="/venue"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <VenuePage />
-          </div>
-        }
-      />
-      <Route
-        path="/faq"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <FAQPage />
-          </div>
-        }
-      />
+        {/* Volunteer Routes - Swapped to match content */}
+        <Route
+          path="/volunteer"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <VolunteerApplicationPage />
+            </div>
+          }
+        />
+        <Route
+          path="/volunteer/register"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <VolunteerPage />
+            </div>
+          }
+        />
 
-      {/* Legal */}
-      <Route
-        path="/privacy"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <PrivacyPolicyPage />
-          </div>
-        }
-      />
-      <Route
-        path="/accessibility"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <AccessibilityPage />
-          </div>
-        }
-      />
-      <Route
-        path="/code-of-conduct"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <CodeOfConductPage />
-          </div>
-        }
-      />
-      <Route
-        path="/licensing"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <LicensingPage />
-          </div>
-        }
-      />
+        <Route
+          path="/venue"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <VenuePage />
+            </div>
+          }
+        />
+        <Route
+          path="/faq"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <FAQPage />
+            </div>
+          }
+        />
 
-      {/* Payment Routes (Sprint 03) */}
-      <Route
-        path="/payment/success"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <PaymentSuccessPage />
-          </div>
-        }
-      />
-      <Route
-        path="/payment/fail"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <PaymentFailPage />
-          </div>
-        }
-      />
-      <Route
-        path="/payment/cancel"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <PaymentCancelPage />
-          </div>
-        }
-      />
+        {/* Legal */}
+        <Route
+          path="/privacy"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <PrivacyPolicyPage />
+            </div>
+          }
+        />
+        <Route
+          path="/accessibility"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <AccessibilityPage />
+            </div>
+          }
+        />
+        <Route
+          path="/code-of-conduct"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <CodeOfConductPage />
+            </div>
+          }
+        />
+        <Route
+          path="/licensing"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <LicensingPage />
+            </div>
+          }
+        />
 
-      <Route
-        path="/community/register"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <CommunityRegistrationPage />
-          </div>
-        }
-      />
+        {/* Payment Routes (Sprint 03) */}
+        <Route
+          path="/payment/success"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <PaymentSuccessPage />
+            </div>
+          }
+        />
+        <Route
+          path="/payment/fail"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <PaymentFailPage />
+            </div>
+          }
+        />
+        <Route
+          path="/payment/cancel"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <PaymentCancelPage />
+            </div>
+          }
+        />
 
-      {/* 404 */}
-      <Route
-        path="*"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <NotFoundPage />
-          </div>
-        }
-      />
+        <Route
+          path="/community/register"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <CommunityRegistrationPage />
+            </div>
+          }
+        />
 
-      <Route
-        path="/coming-soon"
-        element={
-          <div key={location.pathname} className="page-transition">
-            <ComingSoon />
-          </div>
-        }
-      />
+        {/* 404 */}
+        <Route
+          path="*"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <NotFoundPage />
+            </div>
+          }
+        />
+
+        <Route
+          path="/coming-soon"
+          element={
+            <div key={location.pathname} className="page-transition">
+              <ComingSoon />
+            </div>
+          }
+        />
+      </Route>
     </Routes>
+
   );
 }
 
@@ -331,10 +362,7 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Layout>
-        <ScrollToTop />
-        <AnimatedRoutes />
-      </Layout>
+      <AnimatedRoutes />
     </BrowserRouter>
   );
 }
