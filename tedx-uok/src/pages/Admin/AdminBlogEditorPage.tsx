@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import BlockEditor from "./BlockEditor";
@@ -12,8 +12,8 @@ const toSlug = (text: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-// Unique ID
-const uid = () => Math.random().toString(36).slice(2, 9);
+// Unique ID (Valid UUID for PostgreSQL)
+const uid = () => crypto.randomUUID();
 
 export default function AdminBlogEditorPage() {
   const { id } = useParams<{ id?: string }>();
@@ -28,6 +28,8 @@ export default function AdminBlogEditorPage() {
   const [isPublished, setIsPublished] = useState(false);
   const [saving, setSaving] = useState(false);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
+  const [isUploadingCover, setIsUploadingCover] = useState(false);
+  const coverInputRef = useRef<HTMLInputElement>(null);
 
   // Load existing post
   useEffect(() => {
@@ -55,6 +57,29 @@ export default function AdminBlogEditorPage() {
       setSlug(toSlug(title));
     }
   }, [title, slugManuallyEdited]);
+
+  async function handleCoverUpload(file: File) {
+    setIsUploadingCover(true);
+    const ext = file.name.split(".").pop();
+    const path = `blog-covers/${Date.now()}-${uid()}.${ext}`;
+
+    const { error } = await supabase.storage
+      .from("blog-images")
+      .upload(path, file);
+
+    if (error) {
+      alert("Upload failed: " + error.message);
+      setIsUploadingCover(false);
+      return;
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("blog-images").getPublicUrl(path);
+
+    setCoverImageUrl(publicUrl);
+    setIsUploadingCover(false);
+  }
 
   async function handleSave(publish?: boolean) {
     if (!title.trim()) {
@@ -87,16 +112,17 @@ export default function AdminBlogEditorPage() {
         .update(payload)
         .eq("blog_id", id);
       if (error) {
-        alert("Save failed: " + error.message);
+        console.error("Update Error:", error);
+        alert(`Update failed: ${error.message} (${error.code})`);
         setSaving(false);
         return;
       }
     } else {
-      const { error } = await supabase
-        .from("blog_posts")
-        .insert({ ...payload, blog_id: uid() });
+      // Let the database generate the blog_id automatically via DEFAULT uuid_generate_v4()
+      const { error } = await supabase.from("blog_posts").insert(payload);
       if (error) {
-        alert("Save failed: " + error.message);
+        console.error("Insert Error:", error);
+        alert(`Create failed: ${error.message} (${error.code})`);
         setSaving(false);
         return;
       }
@@ -183,25 +209,86 @@ export default function AdminBlogEditorPage() {
             </div>
             <div>
               <label className="block text-sm text-white/60 mb-1">
-                Cover Image URL
+                Cover Image
               </label>
+              <div className="space-y-3">
+                {coverImageUrl ? (
+                  <div className="relative group">
+                    <img
+                      src={coverImageUrl}
+                      alt="Cover preview"
+                      className="w-full h-40 object-cover rounded-lg border border-[#1F1F1F]"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 rounded-lg">
+                      <button
+                        type="button"
+                        onClick={() => coverInputRef.current?.click()}
+                        className="px-3 py-1 bg-white text-black text-xs font-bold rounded hover:bg-[#EB0028] hover:text-white transition-colors"
+                      >
+                        Change Image
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setCoverImageUrl("")}
+                        className="px-3 py-1 bg-black/60 text-white text-xs font-bold rounded hover:bg-red-600 transition-colors"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => coverInputRef.current?.click()}
+                    className="w-full h-40 border-2 border-dashed border-[#1F1F1F] hover:border-[#EB0028] rounded-lg flex flex-col items-center justify-center cursor-pointer transition-all group"
+                  >
+                    {isUploadingCover ? (
+                      <p className="text-white/40 text-sm animate-pulse">
+                        Uploading...
+                      </p>
+                    ) : (
+                      <>
+                        <div className="w-10 h-10 rounded-full bg-[#1F1F1F] group-hover:bg-[#EB0028]/10 flex items-center justify-center mb-2 transition-colors">
+                          <span className="text-white/40 group-hover:text-[#EB0028]">
+                            +
+                          </span>
+                        </div>
+                        <p className="text-white/40 text-sm font-medium">
+                          Click to upload cover image
+                        </p>
+                        <p className="text-white/20 text-xs mt-1">
+                          Recommended: 1200x630px
+                        </p>
+                      </>
+                    )}
+                  </div>
+                )}
+
+                {/* Optional: manual URL input */}
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={coverImageUrl}
+                    onChange={(e) => setCoverImageUrl(e.target.value)}
+                    placeholder="Or paste image URL here..."
+                    className="flex-1 bg-black border-2 border-[#1F1F1F] focus:border-[#EB0028] rounded-lg px-4 py-2 text-white text-xs outline-none transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Hidden file input */}
               <input
-                type="url"
-                value={coverImageUrl}
-                onChange={(e) => setCoverImageUrl(e.target.value)}
-                placeholder="https://..."
-                className="w-full bg-black border-2 border-[#1F1F1F] focus:border-[#EB0028] rounded-lg px-4 py-2 text-white text-sm outline-none transition-all"
+                ref={coverInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) handleCoverUpload(file);
+                  e.target.value = "";
+                }}
               />
             </div>
           </div>
-
-          {coverImageUrl && (
-            <img
-              src={coverImageUrl}
-              alt="cover"
-              className="w-full h-40 object-cover rounded-lg"
-            />
-          )}
         </section>
 
         {/* Block Editor */}
