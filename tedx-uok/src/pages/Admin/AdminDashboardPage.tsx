@@ -32,8 +32,55 @@ export default function AdminDashboardPage() {
 
   async function deletePost(id: string) {
     if (!confirm("Delete this post? This cannot be undone.")) return;
-    await supabase.from("blog_posts").delete().eq("blog_id", id);
-    fetchPosts();
+
+    // 1. Get the post data first to identify images to delete
+    const { data: post } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("blog_id", id)
+      .single();
+
+    if (post) {
+      const pathsToDelete: string[] = [];
+
+      // Extract cover image path
+      if (post.cover_image_url?.includes("blog-images")) {
+        const path = post.cover_image_url.split("/blog-images/")[1];
+        if (path) pathsToDelete.push(path);
+      }
+
+      // Extract block image paths
+      if (post.blocks && Array.isArray(post.blocks)) {
+        post.blocks.forEach((block: any) => {
+          if (
+            block.type === "image" &&
+            block.imageUrl?.includes("blog-images")
+          ) {
+            const path = block.imageUrl.split("/blog-images/")[1];
+            if (path) pathsToDelete.push(path);
+          }
+        });
+      }
+
+      // 2. Remove files from Supabase Storage
+      if (pathsToDelete.length > 0) {
+        const { error } = await supabase.storage
+          .from("blog-images")
+          .remove(pathsToDelete);
+        if (error) console.error("Error deleting images:", error);
+      }
+    }
+
+    // 3. Delete the database record
+    const { error: dbError } = await supabase
+      .from("blog_posts")
+      .delete()
+      .eq("blog_id", id);
+    if (dbError) {
+      alert("Delete failed: " + dbError.message);
+    } else {
+      fetchPosts();
+    }
   }
 
   return (

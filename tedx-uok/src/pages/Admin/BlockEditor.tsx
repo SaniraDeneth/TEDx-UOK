@@ -37,11 +37,34 @@ export default function BlockEditor({ blocks, onChange }: BlockEditorProps) {
     onChange(updated);
   }
 
-  function updateBlock(id: string, changes: Partial<Block>) {
+  async function updateBlock(id: string, changes: Partial<Block>) {
     onChange(blocks.map((b) => (b.id === id ? { ...b, ...changes } : b)));
   }
 
-  function removeBlock(id: string) {
+  async function deleteStorageFile(url: string) {
+    if (!url || !url.includes("blog-images")) return;
+    
+    try {
+      const match = url.match(/\/blog-images\/(.+)$/);
+      if (!match) return;
+      
+      const cleanPath = decodeURIComponent(match[1].split("?")[0]);
+      const filenameOnly = cleanPath.split("/").pop() || "";
+      const folder = cleanPath.includes("/") ? cleanPath.split("/")[0] : "blog-cover";
+
+      await supabase.storage
+        .from("blog-images")
+        .remove([cleanPath, filenameOnly, `${folder}/${filenameOnly}`]);
+    } catch (err) {
+      // Sliently handle errors
+    }
+  }
+
+  async function removeBlock(id: string) {
+    const block = blocks.find((b) => b.id === id);
+    if (block?.type === "image" && block.imageUrl) {
+      await deleteStorageFile(block.imageUrl);
+    }
     onChange(blocks.filter((b) => b.id !== id));
   }
 
@@ -59,7 +82,7 @@ export default function BlockEditor({ blocks, onChange }: BlockEditorProps) {
   async function handleImageUpload(blockId: string, file: File) {
     setUploading(blockId);
     const ext = file.name.split(".").pop();
-    const path = `blog/${Date.now()}-${uid()}.${ext}`;
+    const path = `blog-content/${Date.now()}-${uid()}.${ext}`;
 
     const { error } = await supabase.storage
       .from("blog-images")
@@ -196,12 +219,14 @@ export default function BlockEditor({ blocks, onChange }: BlockEditorProps) {
               {block.imageUrl ? (
                 <div className="relative">
                   <img
-                    src={block.imageUrl}
+                    src={`${block.imageUrl}?t=${Date.now()}`}
                     alt="block"
                     className="max-h-64 rounded-lg object-contain"
                   />
                   <button
-                    onClick={() => updateBlock(block.id, { imageUrl: "" })}
+                    onClick={() => {
+                      updateBlock(block.id, { imageUrl: "" });
+                    }}
                     className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded hover:bg-red-600 transition-colors"
                   >
                     Replace

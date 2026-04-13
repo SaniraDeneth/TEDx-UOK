@@ -30,6 +30,7 @@ export default function AdminBlogEditorPage() {
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [isUploadingCover, setIsUploadingCover] = useState(false);
   const coverInputRef = useRef<HTMLInputElement>(null);
+  const prevCoverUrlRef = useRef<string>("");
 
   // Load existing post
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function AdminBlogEditorPage() {
         setBlocks(data.blocks ?? []);
         setIsPublished(data.is_published);
         setSlugManuallyEdited(true); // Don't auto-overwrite slug on edit
+        prevCoverUrlRef.current = data.cover_image_url ?? "";
       });
   }, [id]);
 
@@ -58,10 +60,30 @@ export default function AdminBlogEditorPage() {
     }
   }, [title, slugManuallyEdited]);
 
+  async function deleteStorageFile(url: string) {
+    if (!url || !url.includes("blog-images")) return;
+    
+    try {
+      const match = url.match(/\/blog-images\/(.+)$/);
+      if (!match) return;
+      
+      const cleanPath = decodeURIComponent(match[1].split("?")[0]);
+      const filenameOnly = cleanPath.split("/").pop() || "";
+      const folder = cleanPath.includes("/") ? cleanPath.split("/")[0] : "blog-cover";
+
+      // Try deleting using multiple potential path variations for maximum reliability
+      await supabase.storage
+        .from("blog-images")
+        .remove([cleanPath, filenameOnly, `${folder}/${filenameOnly}`]);
+    } catch (err) {
+      // Sliently handle parsing errors
+    }
+  }
+
   async function handleCoverUpload(file: File) {
     setIsUploadingCover(true);
     const ext = file.name.split(".").pop();
-    const path = `blog-covers/${Date.now()}-${uid()}.${ext}`;
+    const path = `blog-cover/${Date.now()}-${uid()}.${ext}`;
 
     const { error } = await supabase.storage
       .from("blog-images")
@@ -95,6 +117,25 @@ export default function AdminBlogEditorPage() {
     const htmlContent = blocksToHtml(blocks);
     const shouldPublish = publish ?? isPublished;
 
+    // 1. Get current post data to find images being replaced
+    let oldImageUrls: string[] = [];
+    if (isEditing) {
+      const { data: oldPost } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("blog_id", id)
+        .single();
+      
+      if (oldPost) {
+        if (oldPost.cover_image_url) oldImageUrls.push(oldPost.cover_image_url);
+        if (oldPost.blocks) {
+          oldPost.blocks.forEach((b: any) => {
+            if (b.type === "image" && b.imageUrl) oldImageUrls.push(b.imageUrl);
+          });
+        }
+      }
+    }
+
     const payload = {
       title,
       slug,
@@ -106,6 +147,7 @@ export default function AdminBlogEditorPage() {
       published_at: shouldPublish ? new Date().toISOString() : null,
     };
 
+    let success = false;
     if (isEditing) {
       const { error } = await supabase
         .from("blog_posts")
@@ -113,23 +155,40 @@ export default function AdminBlogEditorPage() {
         .eq("blog_id", id);
       if (error) {
         console.error("Update Error:", error);
-        alert(`Update failed: ${error.message} (${error.code})`);
-        setSaving(false);
-        return;
+        alert(`Update failed: ${error.message}`);
+      } else {
+        success = true;
       }
     } else {
-      // Let the database generate the blog_id automatically via DEFAULT uuid_generate_v4()
       const { error } = await supabase.from("blog_posts").insert(payload);
       if (error) {
         console.error("Insert Error:", error);
-        alert(`Create failed: ${error.message} (${error.code})`);
-        setSaving(false);
-        return;
+        alert(`Create failed: ${error.message}`);
+      } else {
+        success = true;
       }
     }
 
-    setSaving(false);
-    if (publish || isEditing) navigate("/admin/dashboard");
+    if (success) {
+      // 2. Perform cleanup of abandoned images
+      const newImageUrls = [
+        coverImageUrl,
+        ...blocks
+          .filter(b => b.type === "image" && b.imageUrl)
+          .map(b => b.imageUrl as string)
+      ];
+
+      const abandonedUrls = oldImageUrls.filter(url => !newImageUrls.includes(url));
+      
+      for (const url of abandonedUrls) {
+        await deleteStorageFile(url);
+      }
+
+      setSaving(false);
+      navigate("/admin/dashboard");
+    } else {
+      setSaving(false);
+    }
   }
 
   return (
@@ -215,7 +274,7 @@ export default function AdminBlogEditorPage() {
                 {coverImageUrl ? (
                   <div className="relative group">
                     <img
-                      src={coverImageUrl}
+                      src={`${coverImageUrl}?t=${Date.now()}`}
                       alt="Cover preview"
                       className="w-full h-40 object-cover rounded-lg border border-[#1F1F1F]"
                     />
