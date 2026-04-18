@@ -35,7 +35,9 @@ import AdminBlogEditorPage from "../pages/Admin/AdminBlogEditorPage";
 import AdminGuard from "../pages/Admin/AdminGuard";
 
 import ScrollToTop from "../components/common/ScrollToTop";
-
+import BlogListPage from "../pages/Blog/BlogListPage";
+import BlogDetailPage from "../pages/Blog/BlogDetailPage";
+import BlogPostPage from "../pages/Blog/BlogPostPage";
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -183,7 +185,7 @@ function AnimatedRoutes() {
           path="/blog"
           element={
             <div key={location.pathname} className="page-transition">
-              <ComingSoon />
+              <BlogListPage />
             </div>
           }
         />
@@ -191,7 +193,7 @@ function AnimatedRoutes() {
           path="/blog/:slug"
           element={
             <div key={location.pathname} className="page-transition">
-              <ComingSoon />
+              <BlogDetailPage />
             </div>
           }
         />
@@ -199,7 +201,7 @@ function AnimatedRoutes() {
           path="/blog/detail/:id"
           element={
             <div key={location.pathname} className="page-transition">
-              <ComingSoon />
+              <BlogPostPage />
             </div>
           }
         />
