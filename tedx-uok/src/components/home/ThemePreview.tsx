@@ -3,7 +3,6 @@ import { Button } from "../ui/Button";
 import { Link } from "react-router-dom";
 import { formatTedxText } from "../../utils/textFormatting";
 
-
 const subPillars = [
   {
     title: "Innovation",

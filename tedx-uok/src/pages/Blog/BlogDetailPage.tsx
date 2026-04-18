@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Calendar, User } from 'lucide-react';
-import { useBlog } from '../../hooks/useBlog';
-import { BlogCard } from '../../components/blog/BlogCard';
+import { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
+import { useBlog } from "../../hooks/useBlog";
+import { BlogCard } from "../../components/blog/BlogCard";
 
 export default function BlogDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { posts, loading, getRelatedPosts } = useBlog();
-  
+
   // Scroll to top on mount or slug change
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,37 +22,42 @@ export default function BlogDetailPage() {
     );
   }
 
-  const post = posts.find(p => p.slug === slug);
+  const post = posts.find((p) => p.slug === slug);
   const relatedPosts = slug ? getRelatedPosts(slug) : [];
 
   if (!post) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center text-white">
         <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
-        <Link to="/blog" className="text-[#EB0028] hover:underline">Back to Blog</Link>
+        <Link to="/blog" className="text-[#EB0028] hover:underline">
+          Back to Blog
+        </Link>
       </div>
     );
   }
 
   const formatDate = (dateString?: string) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    if (!dateString) return "";
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   return (
-    <article className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-20">
+    <article className="min-h-screen bg-[#0a0a0a] text-white pb-20">
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto px-6 lg:px-12 mb-16">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-white/50 hover:text-[#EB0028] transition-colors mb-8">
+        <Link
+          to="/blog"
+          className="inline-flex items-center gap-2 text-white/50 hover:text-[#EB0028] transition-colors mb-8"
+        >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Blog</span>
         </Link>
-        
-        <motion.h1 
+
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight"
@@ -60,7 +65,7 @@ export default function BlogDetailPage() {
           {post.title}
         </motion.h1>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -83,15 +88,15 @@ export default function BlogDetailPage() {
 
       {/* Cover Image */}
       {post.cover_image_url && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
           className="w-full max-w-6xl mx-auto px-6 lg:px-12 mb-16"
         >
           <div className="aspect-[21/9] overflow-hidden rounded-3xl bg-white/5">
-            <img 
-              src={post.cover_image_url} 
+            <img
+              src={post.cover_image_url}
               alt={post.title}
               className="w-full h-full object-cover"
             />
@@ -100,7 +105,7 @@ export default function BlogDetailPage() {
       )}
 
       {/* Content */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
@@ -114,7 +119,11 @@ export default function BlogDetailPage() {
           <h3 className="text-3xl font-bold mb-12">Related Articles</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {relatedPosts.map((relatedPost, index) => (
-              <BlogCard key={relatedPost.blog_id} post={relatedPost} index={index} />
+              <BlogCard
+                key={relatedPost.blog_id}
+                post={relatedPost}
+                index={index}
+              />
             ))}
           </div>
         </div>

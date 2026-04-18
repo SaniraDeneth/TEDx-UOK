@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { supabase } from "../../api/supabaseClient";
+import { supabase } from "../../lib/supabase";
 import { FormInput } from "../../components/forms/FormInput";
 import { FormSelect } from "../../components/forms/FormSelect";
 import { SubmitButton } from "../../components/forms/SubmitButton";

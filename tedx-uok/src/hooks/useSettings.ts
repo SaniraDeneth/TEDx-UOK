@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../api/supabaseClient";
+import { supabase } from "../lib/supabase";
 
 export interface SettingsData {
   settings_id: string;
@@ -27,19 +27,13 @@ export const useSettings = () => {
         const { data, error } = await supabase
           .from("settings")
           .select("*")
-          .limit(1)
-          .single();
+          .maybeSingle();
 
         if (error) {
-          if (error.code === "PGRST116") {
-            console.warn("No settings row found in database.");
-            setSettings(null);
-          } else {
-            throw error;
-          }
-        } else {
-          setSettings(data);
-        }
+          throw error;
+        } 
+        
+        setSettings(data);
       } catch (err: any) {
         console.error("Error fetching settings:", err.message);
         setError(err.message);

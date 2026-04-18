@@ -41,7 +41,7 @@ export function useBlog() {
                 .from('blog_posts')
                 .select('*')
                 .eq('slug', slug)
-                .single();
+                .maybeSingle();
 
             if (error) throw error;
             return data as BlogPost;

@@ -1,5 +1,5 @@
 import Loading from "../../components/ui/Loading";
-import { supabase } from "../../api/supabaseClient";
+import { supabase } from "../../lib/supabase";
 import { useEvents } from "../../hooks/useEvents";
 import { useSpeakers } from "../../hooks/useSpeakers";
 import { formatTedxText } from "../../utils/textFormatting";

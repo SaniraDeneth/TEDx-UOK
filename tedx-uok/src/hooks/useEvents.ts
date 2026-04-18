@@ -29,24 +29,42 @@ export const useEvents = () => {
         const { data: settingsData, error: settingsError } = await supabase
           .from("settings")
           .select("current_event_id")
-          .single();
+          .maybeSingle(); // Switch to maybeSingle to avoid 406 error if empty
 
-        if (settingsError) throw settingsError;
-        if (!settingsData?.current_event_id)
-          throw new Error("No current event set in Settings table");
+        if (settingsError) {
+          console.error("Settings Fetch Error:", settingsError);
+          throw settingsError;
+        }
+        
+        if (!settingsData) {
+          console.warn("No settings found in 'settings' table. Please run the seed script.");
+          setLoading(false);
+          return;
+        }
+
+        if (!settingsData.current_event_id) {
+          throw new Error("No current_event_id set in Settings table");
+        }
 
         // 2. Fetch THAT specific event (and its venue)
         const { data: eventData, error: eventError } = await supabase
           .from("events")
           .select("*, venues(*)")
           .eq("event_id", settingsData.current_event_id)
-          .single();
+          .maybeSingle(); // Switch to maybeSingle to handle missing event gracefully
 
-        if (eventError) throw eventError;
+        if (eventError) {
+          console.error("Event Fetch Error for ID:", settingsData.current_event_id, eventError);
+          throw eventError;
+        }
+
+        if (!eventData) {
+          console.warn(`Event not found for ID: ${settingsData.current_event_id}`);
+        }
 
         setEvent(eventData);
       } catch (err: any) {
-        console.error("Error fetching event:", err.message);
+        console.error("useEvents Hook Error:", err.message);
         setError(err.message);
       } finally {
         setLoading(false);

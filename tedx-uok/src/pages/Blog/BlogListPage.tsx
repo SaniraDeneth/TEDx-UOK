@@ -1,8 +1,7 @@
-import { formatTedxText } from '../../utils/textFormatting';
-import { motion } from 'framer-motion';
-import { useBlog } from '../../hooks/useBlog';
-import { BlogCard } from '../../components/blog/BlogCard';
-import { FeaturedPost } from '../../components/blog/FeaturedPost';
+import { motion } from "framer-motion";
+import { useBlog } from "../../hooks/useBlog";
+import { BlogCard } from "../../components/blog/BlogCard";
+import { FeaturedPost } from "../../components/blog/FeaturedPost";
 
 export default function BlogListPage() {
   const { posts, loading } = useBlog();
@@ -20,15 +19,10 @@ export default function BlogListPage() {
   const gridPosts = posts.slice(1);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-20">
+    <div className="min-h-screen bg-[#0a0a0a] text-white pb-20">
       <div className="max-w-7xl xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 lg:px-12">
         {/* Header - Minimal "r." style from inspiration, adapted to TEDx */}
         {/* Header - Minimal "r." style from inspiration, adapted to TEDx */}
-        <div className="mb-16">
-          <span className="font-bold text-2xl tracking-tighter">
-            <span style={{ color: '#EB0028' }}>{formatTedxText("TEDx")}</span><span className="text-white font-normal"> UoK</span>
-          </span>
-        </div>
 
         {/* Featured Hero Section */}
         {featuredPost && <FeaturedPost post={featuredPost} />}
